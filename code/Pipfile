@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 langchain = "*"
 openai = "*"
+beautifulsoup4 = "*"
+lxml = "*"
+requests = "*"
+pypdf = "*"
 
 [dev-packages]
 
