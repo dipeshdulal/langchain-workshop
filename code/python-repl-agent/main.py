@@ -10,4 +10,4 @@ agent_executor = create_python_agent(
     agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
 )
 
-print(agent_executor.run("Search bing for a picture of a cat. Save the image in jpg format."))
+print(agent_executor.run("Give me QR code of https://wesionary.team and save png file in current working directory."))
