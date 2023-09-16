@@ -23,11 +23,22 @@
 
 						Develop AI Application through Langchain and LLM's
 
-					</textarea>
-
-					
+					</textarea>					
 				</section>
 				<section data-markdown>
+					<textarea data-template>
+						
+						## About me
+
+						- Prototyping, Researching
+						- Mobile apps, cloud apps, real-time
+						- Feel free to contact me;
+						
+						> https://github.com/dipeshdulal
+
+					</textarea>					
+				</section>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						
 						## Pre-requisites
@@ -36,8 +47,18 @@
 						  - https://platform.openai.com/ to create a new account
 
 					</textarea>
-				</section>
+				</section> -->
 				
+				<section data-markdown>
+					<textarea data-template>
+						
+						## LLM, LangChain, GPT?
+						- Heard of them?
+						- Using it in any way?
+
+					</textarea>
+				</section>
+
 				<section data-markdown>
 					<textarea data-template>
 						
@@ -45,7 +66,7 @@
 						- LLM, large language models
 						- Trained on large corpus of text, able to generalize, and generate text.
 						- GPT, generative, pre-trained, transformer
-							- Generative, create it own text
+							- Generative, create it's own text
 							- Pre-trained, trained on large corpus of text
 							- Transformer, a type of neural network architecture
 
@@ -56,12 +77,35 @@
 						
 						## What's langchain
 						- Framework to develop applications using LLM's
-						- Assumes Applications are; 
-							- Data aware; can interact with various data sources
-							- Agentic; allowing llm to interact with environment
+						- Combine LLM with external sources of computation and data.
+						- Allow agentic communication.
+
 
 					</textarea>
 				</section>
+				<section data-markdown>
+					<textarea data-template>
+
+						Frameworks in
+						
+						<div style="display:flex; max-width: 200px; margin: 0 auto; transform: translateX(-50%);">
+							<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" />
+							<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" />
+						</div>
+							
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+
+						<img src="images/langchain-overview.png" />
+							
+					</textarea>
+				</section>
+
+				
+
 				<section data-markdown>
 					<textarea data-template>
 						
@@ -87,7 +131,8 @@
 
 					</textarea>
 				</section>
-				<section data-markdown>
+
+				<!-- <section data-markdown>
 					<textarea data-template>
 						
 						## Environment Setup
@@ -95,8 +140,9 @@
 						- Go to [openai](https://platform.openai.com/) and create a new API key
 
 					</textarea>
-				</section>
-				<section data-markdown>
+				</section> -->
+				
+				<!-- <section data-markdown>
 					<textarea data-template>
 						
 						## Hello Langchain 🙋
@@ -108,9 +154,155 @@
 						- Let's code. 🧑‍💻
 
 					</textarea>
+				</section> -->
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Hello Langchain 🙋
+						
+						```python
+						# choose a type of LLM
+						llm = OpenAI(openai_api_key=...)
+
+						# give it a prompt
+						text = "What's NSOK?"
+
+						# run prompt against llm
+						print(llm.predict(text=text))
+						```
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown>
+					<textarea data-template>
+
+						<img src="images/components.png" />
+							
+					</textarea>
 				</section>
 
 				<section data-markdown>
+					<textarea data-template>
+						
+						## Combining them 🔗
+
+						```python
+
+						# system prompt
+						template = """You are a helpful assistant."""
+						system_prompt = SystemMessagePromptTemplate
+										.from_template(template)
+
+						# human prompt
+						human_prompt_template = """Give me 5 {things}?"""
+						human_prompt = HumanMessagePromptTemplate
+										.from_template(human_prompt_template)
+
+						# make chat prompt
+						chat_prompt = ChatPromptTemplate
+										.from_messages([
+											template, 
+											human_prompt
+										])
+
+						# build a chain
+						chain = LLMChain(
+							llm=llm,
+							prompt=chat_prompt,
+							output_key="items"
+						)
+
+						# run the chain
+						print(chain.run("programming languages"))
+						```
+					</textarea>
+				</section>
+
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Combining chains
+						<small>like previous example we can combine multiple chains</small>
+						```python
+						# ...
+						final_prompt = PromptTemplate.from_template("""
+							Give me description of the items given. 
+							{items}
+						""")
+
+						chain_two = LLMChain(llm=llm, prompt=final_prompt)
+
+						combined_chain = SequentialChain(
+							chains=[chain, chain_two]
+						)
+
+						combined_chain.run("programming languages")
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Combining chains
+						<small>like previous example we can combine multiple chains</small>
+						```python
+						# ...
+						final_prompt = PromptTemplate.from_template("""
+							Give me description of the items given. 
+							{items}
+						""")
+
+						chain_two = LLMChain(llm=llm, prompt=final_prompt)
+
+						combined_chain = SequentialChain(
+							chains=[chain, chain_two]
+						)
+
+						combined_chain.run("programming languages")
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Agents
+						
+						- Choose a sequence of actions.
+						- Chains, hardcode sequence of actions.
+						- But in agents, 
+						- they choose the actions to take. 
+						- We provide tools.
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Agents Demo 🤖
+
+						let's write agent that writes code for us 
+						
+						and performs some task.
+
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						
+						## Any Questions
+
+					</textarea>
+				</section>
+
+				<!-- <section data-markdown>
 					<textarea data-template>
 						
 						## Let's try some integrations
@@ -118,9 +310,9 @@
 						- eg; Summarizing a pdf document. 
 
 					</textarea>
-				</section>
+				</section> -->
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						
 						## 🕵️ Documentation Searching
@@ -129,16 +321,16 @@
 						- eg; ask personalized question to notion document.
 
 					</textarea>
-				</section>
+				</section> -->
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						## 🕵️ Documentation Searching
 						- any ideas?
 					</textarea>
-				</section>
+				</section> -->
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						## Embedding
 						- Act of converting text to vectors.
@@ -146,15 +338,15 @@
 						<img src="images/embedding.png" />
 
 					</textarea>
-				</section>
+				</section> -->
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						<img src="images/tsne.png" />
 					</textarea>
-				</section>
+				</section> -->
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						## Vector Stores
 						<img src="images/vector-store.avif" />
@@ -170,9 +362,9 @@
 						## Previous demo using vector stores
 						- coding time. 🧑‍💻
 					</textarea>
-				</section>
+				</section> -->
 				
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<textarea data-template>
 						## Any Questions?
 					</textarea>
@@ -184,7 +376,7 @@
 
 						Thank you. 🙏
 					</textarea>
-				</section>
+				</section> -->
 				
 
 			</div>
